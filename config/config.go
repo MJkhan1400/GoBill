@@ -17,7 +17,7 @@ var (
 func LoadConfig(scanner *bufio.Scanner) bool {
 	file, err := os.Open(ConfigFile)
 	if err != nil {
-		fmt.Println("--- Intial Setup ---")
+		fmt.Println("--- Initial Setup ---")
 		fmt.Println("Please enter the path to the product data: ")
 		scanner.Scan()
 
