@@ -1,3 +1,6 @@
+# GoBill Project Structure
+
+```plaintext
 BillGo/
 ├── main.go                  # Entry point with CLI logic
 ├── config/
@@ -12,3 +15,4 @@ BillGo/
 ├── bills/
 │   └── bill_table_xx_yyyy-mm-dd_hh-mm-ss.txt  # Generated bills
 └── README.md                # Instructions and usage
+```
