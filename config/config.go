@@ -14,22 +14,22 @@ var (
 	VatRate    float64 = 5.0
 )
 
-func LoadConfig(scanner *bufio.Scanner) bool {
+func LoadConfig(inputScanner *bufio.Scanner) bool {
 	file, err := os.Open(ConfigFile)
 	if err != nil {
 		fmt.Println("--- Initial Setup ---")
 		fmt.Println("Please enter the path to the product data: ")
-		scanner.Scan()
+		inputScanner.Scan()
 
-		ProductCSV = strings.TrimSpace(scanner.Text())
+		ProductCSV = strings.TrimSpace(inputScanner.Text())
 		if ProductCSV == "" {
 			ProductCSV = "products.csv"
 		}
 
 		fmt.Println("Please enter the VAT rate (default is 5% for UAE): ")
-		scanner.Scan()
+		inputScanner.Scan()
 
-		vatRate, err := strconv.ParseFloat(scanner.Text(), 64)
+		vatRate, err := strconv.ParseFloat(inputScanner.Text(), 64)
 		if err != nil {
 			fmt.Println("Invalid VAT rate. Using default 5%.")
 			vatRate = 5.0
@@ -38,14 +38,14 @@ func LoadConfig(scanner *bufio.Scanner) bool {
 		SaveConfig()
 		return true
 	} else {
-		scanner := bufio.NewScanner(file)
+		fileScanner := bufio.NewScanner(file)
 
-		if scanner.Scan() {
-			ProductCSV = scanner.Text()
+		if fileScanner.Scan() {
+			ProductCSV = fileScanner.Text()
 		}
 
-		if scanner.Scan() {
-			VatRate, _ = strconv.ParseFloat(scanner.Text(), 64)
+		if fileScanner.Scan() {
+			VatRate, _ = strconv.ParseFloat(fileScanner.Text(), 64)
 		}
 		file.Close()
 		fmt.Println("Configuration loaded successfully.")
