@@ -54,3 +54,21 @@ func LoadProducts() {
 	}
 	fmt.Println("Loaded products from CSV.")
 }
+
+func SaveProducts() {
+	file, err := os.Create(config.ProductCSV)
+	if err != nil {
+		fmt.Println("Error saving product data: ", err)
+		return
+	}
+	defer file.Close()
+
+	write := csv.NewWriter(file)
+	for _, product := range Products {
+		write.Write([]string{
+			product.Name,
+			fmt.Sprintf("%.2f", product.Price),
+			strconv.Itoa(product.Quantity),
+		})
+	}
+}
